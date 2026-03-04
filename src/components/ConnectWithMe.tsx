@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { FaLinkedin, FaGithub, FaInstagram, FaWhatsapp } from 'react-icons/fa'
 import { HiMail } from 'react-icons/hi'
@@ -89,12 +88,16 @@ export function ConnectWithMe() {
           {items.map((item) => {
             const Icon = item.icon
             return (
-              <motion.article
+              <motion.a
                 key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 variants={cardVariants}
                 whileHover={{ y: -6, scale: 1.02 }}
                 transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="glass-card rounded-2xl p-5 border border-charcoal-light/80 hover:border-crimson/60 hover:shadow-[0_0_35px_rgba(220,38,38,0.35)] transition-all flex items-center gap-4"
+                className="glass-card rounded-2xl p-5 border border-charcoal-light/80 hover:border-crimson/60 hover:shadow-[0_0_35px_rgba(220,38,38,0.35)] transition-all flex items-center gap-4 cursor-pointer"
+                data-cursor
               >
                 <div className="relative flex-shrink-0">
                   <div
@@ -105,19 +108,14 @@ export function ConnectWithMe() {
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <Link
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-sm font-semibold text-warm hover:text-crimson-light transition-colors"
-                  >
+                  <span className="block text-sm font-semibold text-warm hover:text-crimson-light transition-colors">
                     {item.label}
-                  </Link>
+                  </span>
                   <p className="text-xs text-warm-muted/90 mt-0.5 line-clamp-2">
                     {item.description}
                   </p>
                 </div>
-              </motion.article>
+              </motion.a>
             )
           })}
         </motion.div>

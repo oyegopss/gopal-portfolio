@@ -34,11 +34,12 @@ export default function ResumePage() {
             transition={{ delay: 0.2 }}
             className="rounded-2xl border border-charcoal-light bg-charcoal-light/20 overflow-hidden"
           >
-            <div className="aspect-[8.5/11] max-h-[80vh] bg-charcoal flex items-center justify-center text-warm-muted">
-              <div className="text-center p-8">
-                <p className="text-lg mb-4">Resume viewer placeholder</p>
-                <p className="text-sm">Upload your PDF or link to resume for live preview.</p>
-              </div>
+            <div className="aspect-[8.5/11] max-h-[80vh] bg-charcoal">
+              <iframe
+                src="/GopalJiDwivedi.pdf"
+                title="Gopal Ji Dwivedi Resume"
+                className="w-full h-full"
+              />
             </div>
           </motion.div>
           <motion.div
@@ -48,7 +49,7 @@ export default function ResumePage() {
             className="mt-8 flex justify-center"
           >
             <a
-              href="#"
+              href="/GopalJiDwivedi.pdf"
               download
               className="inline-flex items-center gap-2 px-8 py-4 bg-crimson text-white font-semibold rounded-lg hover:bg-crimson-dark transition-colors"
               data-cursor
