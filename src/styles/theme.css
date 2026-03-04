@@ -1,0 +1,9 @@
+/* Design tokens - also defined in Tailwind theme */
+:root {
+  --color-crimson: #DC2626;
+  --color-crimson-dark: #B91C1C;
+  --color-gold: #D4AF37;
+  --color-charcoal: #1a1a1a;
+  --color-warm: #FAFAF8;
+  --color-orange: #EA580C;
+}
