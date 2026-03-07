@@ -54,9 +54,11 @@ const categories: Category[] = [
 ]
 
 const SIZE = 500
+const PAD_LEFT = 70 // prevent "Computer Science" label from clipping
 const CENTER = SIZE / 2
 const RINGS = 4
 const MAX_R = 180
+const VIEW_WIDTH = SIZE + PAD_LEFT
 
 function polarToCartesian(angle: number, radius: number) {
   const rad = (angle - 90) * (Math.PI / 180)
@@ -90,7 +92,8 @@ export function TechRadar() {
 
   return (
     <div ref={ref} className="relative w-full max-w-[540px] mx-auto aspect-square">
-      <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className="w-full h-full">
+      <svg viewBox={`0 0 ${VIEW_WIDTH} ${SIZE}`} className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+        <g transform={`translate(${PAD_LEFT}, 0)`}>
         <defs>
           <radialGradient id="radar-center-glow" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="rgba(220,38,38,0.12)" />
@@ -230,6 +233,7 @@ export function TechRadar() {
           transition={{ delay: 0.5, type: 'spring', stiffness: 400 }}
           style={{ transformOrigin: `${CENTER}px ${CENTER}px` }}
         />
+        </g>
       </svg>
     </div>
   )

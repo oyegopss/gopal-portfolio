@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { FaGithub } from 'react-icons/fa'
@@ -27,7 +27,9 @@ export function GitHubActivity() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
+  const fetchActivity = useCallback(() => {
+    setLoading(true)
+    setError(null)
     fetch(`/api/github/activity?username=${GITHUB_USER}`)
       .then((r) => {
         if (!r.ok) throw new Error('Failed to load')
@@ -40,6 +42,10 @@ export function GitHubActivity() {
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false))
   }, [])
+
+  useEffect(() => {
+    fetchActivity()
+  }, [fetchActivity])
 
   if (loading) {
     return (
@@ -58,15 +64,27 @@ export function GitHubActivity() {
   if (error || !data) {
     return (
       <div className="rounded-2xl border border-charcoal-light bg-charcoal-light/20 p-8 text-center">
-        <p className="text-warm-muted mb-4">Unable to load GitHub activity.</p>
-        <Link
-          href={`https://github.com/${GITHUB_USER}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-crimson hover:text-crimson-light font-semibold"
-        >
-          <FaGithub /> View GitHub Profile
-        </Link>
+        <p className="text-warm-muted mb-2">Unable to load GitHub activity.</p>
+        <p className="text-warm-muted/80 text-sm mb-4">
+          Rate limit or network issue. Add <code className="px-1.5 py-0.5 rounded bg-charcoal text-gold text-xs">GITHUB_TOKEN</code> in <code className="px-1.5 py-0.5 rounded bg-charcoal text-gold text-xs">.env.local</code> for reliable loading.
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <button
+            type="button"
+            onClick={fetchActivity}
+            className="px-4 py-2 rounded-lg bg-charcoal border border-charcoal-light text-warm hover:border-crimson/50 transition-colors font-medium"
+          >
+            Retry
+          </button>
+          <Link
+            href={`https://github.com/${GITHUB_USER}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-crimson hover:text-crimson-light font-semibold"
+          >
+            <FaGithub /> View GitHub Profile
+          </Link>
+        </div>
       </div>
     )
   }

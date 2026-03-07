@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FaBrain, FaCode, FaRocket, FaBook } from 'react-icons/fa'
+import { FaBrain, FaLaptopCode, FaRocket, FaBook } from 'react-icons/fa'
 
 const cards = [
   {
@@ -14,7 +14,7 @@ const cards = [
     title: 'Real Project Experience',
     description:
       'Built multiple working systems including Scanura (QR-based menu startup), GitHub Insight analytics platform, and AgriSentinel AI monitoring system.',
-    icon: FaCode,
+    icon: FaLaptopCode,
   },
   {
     title: 'Startup Mindset',
@@ -79,19 +79,20 @@ export function WhyHireMe() {
               <motion.article
                 key={card.title}
                 variants={cardVariants}
-                whileHover={{ y: -6, scale: 1.02 }}
-                transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="relative rounded-2xl glass-card p-6 flex flex-col justify-between border border-charcoal-light/70 hover:border-crimson/60 hover:shadow-[0_0_40px_rgba(220,38,38,0.35)] transition-all"
+                whileHover={{ y: -8, scale: 1.03 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="relative rounded-2xl glass-card p-6 flex flex-col justify-between border border-charcoal-light/70 hover:border-crimson/60 hover:shadow-[0_0_50px_rgba(220,38,38,0.3)] transition-all duration-500 group/card"
               >
                 <div className="mb-6">
-                  <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-crimson/20 text-crimson border border-crimson/40 mb-4">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-crimson/15 text-crimson border border-crimson/30 mb-4 group-hover/card:bg-crimson/25 group-hover/card:scale-110 transition-all duration-300">
                     <Icon className="text-xl" />
                   </div>
-                  <h3 className="text-lg font-display font-semibold text-warm mb-2">
+                  <h3 className="text-lg font-display font-semibold text-warm mb-2 group-hover/card:text-crimson-light transition-colors duration-300">
                     {card.title}
                   </h3>
                   <p className="text-sm text-warm-muted leading-relaxed">{card.description}</p>
                 </div>
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-crimson/5 via-transparent to-gold/5 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none" />
               </motion.article>
             )
           })}

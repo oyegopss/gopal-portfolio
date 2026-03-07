@@ -21,24 +21,34 @@ import { ExperiencePreview } from '@/components/ExperiencePreview'
 
 const featuredProjects = [
   {
-    slug: 'scanura',
-    title: 'Scanura',
-    tagline: 'QR Based Smart Menu System Startup',
-    description: 'Contactless restaurant menu with dynamic updates and scalable architecture.',
-    tech: ['Next.js', 'QR', 'Real-time'],
-    image: '/api/placeholder/400/240',
-    github: '#',
-    live: '#',
+    slug: 'agrisentinel',
+    title: 'AgriSentinel',
+    tagline: 'AI Agriculture Intelligence Platform',
+    description: 'Crop disease detection, yield prediction, and Mandi intelligence using AI and Government Open Data API.',
+    tech: ['AI/ML', 'Python', 'Agriculture'],
+    image: '/images/agrisentinel.png',
+    github: 'https://github.com/oyegopss/agrisentinel-ai',
+    live: 'https://agrisentinel-ai.vercel.app/',
   },
   {
     slug: 'github-insight',
     title: 'GitHub Insight',
-    tagline: 'Repository analytics platform',
-    description: 'GitHub API integration, commit history analysis, and contributor insights.',
+    tagline: 'Repository Analytics Platform',
+    description: 'GitHub API integration, commit history analysis, contributor insights, and code contributions heatmap.',
     tech: ['React', 'GitHub API', 'Analytics'],
-    image: '/api/placeholder/400/240',
-    github: '#',
-    live: '#',
+    image: '/images/github-insight.png',
+    github: 'https://github.com/oyegopss/github-insight',
+    live: 'https://githire-insight-tkefqnaghl8mpxf3pawj7q.streamlit.app/',
+  },
+  {
+    slug: 'scanura',
+    title: 'Scanura',
+    tagline: 'QR Based Smart Menu System Startup',
+    description: 'Contactless restaurant menu with dynamic menu updates and scalable system architecture.',
+    tech: ['Next.js', 'QR', 'Real-time', 'Startup'],
+    image: '/images/scanura.png',
+    github: 'https://github.com/oyegopss/scanura',
+    live: '',
   },
 ]
 
@@ -64,6 +74,46 @@ export default function HomePage() {
             Building scalable software, intelligent systems, and real-world digital products.
           </p>
         </AnimatedLineReveal>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.92, y: 28 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ delay: 1.05, duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="relative mb-8"
+        >
+          <motion.div
+            animate={{ y: [0, -12, 0], rotate: [0, 1.5, 0, -1.5, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+            className="relative mx-auto w-56 h-72 sm:w-64 sm:h-80 rounded-[2rem] overflow-hidden border border-white/10 bg-charcoal-light/40 shadow-[0_0_50px_rgba(220,38,38,0.18)]"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-crimson/20 via-transparent to-gold/10 z-10" />
+            <img
+              src="/images/gopal-profile.png"
+              alt="Gopal Ji Dwivedi"
+              className="h-full w-full object-cover"
+            />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -18 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.5, duration: 0.5 }}
+            className="absolute -left-4 sm:-left-10 top-6 px-3 py-2 rounded-full border border-gold/30 bg-charcoal/80 backdrop-blur text-xs sm:text-sm text-gold shadow-lg"
+          >
+            Software Developer
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 18 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.7, duration: 0.5 }}
+            className="absolute -right-4 sm:-right-10 bottom-8 px-3 py-2 rounded-full border border-crimson/30 bg-charcoal/80 backdrop-blur text-xs sm:text-sm text-warm shadow-lg"
+          >
+            AI + Startup Builder
+          </motion.div>
+          <motion.div
+            className="absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-r from-crimson/20 via-gold/10 to-orange/20 blur-2xl"
+            animate={{ opacity: [0.45, 0.9, 0.45], scale: [0.96, 1.03, 0.96] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </motion.div>
         <HeroRotatingLine />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -133,6 +183,44 @@ export default function HomePage() {
 
       {/* Connect With Me - social links */}
       <ConnectWithMe />
+
+      {/* Contact - get in touch CTA */}
+      <section className="py-24 px-6 bg-charcoal-light/20">
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="text-4xl md:text-5xl font-display font-bold text-warm mb-4"
+          >
+            Contact
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ delay: 0.1, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="text-warm-muted text-lg mb-8"
+          >
+            Get in touch for opportunities or collaboration.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ delay: 0.2, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            <Link
+              href="/contact"
+              className="glow-hover inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-crimson text-white font-semibold hover:bg-crimson-dark transition-all"
+              data-cursor
+            >
+              <HiMail className="text-xl" /> Start a conversation
+            </Link>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Featured Projects - motion section */}
       <MotionSection className="py-24 px-6">
@@ -238,8 +326,8 @@ export default function HomePage() {
                   Learn more <HiArrowDown className="rotate-[-90deg]" />
                 </Link>
               </div>
-              <div className="w-full md:w-80 h-48 rounded-xl bg-charcoal border border-charcoal-light flex items-center justify-center text-warm-muted">
-                [Scanura visual]
+              <div className="w-full md:w-80 h-48 rounded-xl overflow-hidden border border-charcoal-light">
+                <img src="/images/scanura.png" alt="Scanura" className="w-full h-full object-cover" />
               </div>
             </div>
           </MotionSection>

@@ -5,18 +5,45 @@ import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
 import { HiMail } from 'react-icons/hi'
 
+const CONTACT_EMAIL = 'oyegopss@gmail.com'
+const WEB3FORMS_ACCESS_KEY =
+  process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'e448636b-c574-4897-b68f-e61170a92057'
+
 const socials = [
-  { href: 'https://github.com', icon: FaGithub, label: 'GitHub' },
-  { href: 'https://linkedin.com', icon: FaLinkedin, label: 'LinkedIn' },
-  { href: 'mailto:contact@gopal.dev', icon: HiMail, label: 'Email' },
+  { href: 'https://github.com/oyegopss', icon: FaGithub, label: 'GitHub' },
+  { href: 'https://linkedin.com/in/gopaljidwivedi', icon: FaLinkedin, label: 'LinkedIn' },
+  { href: `mailto:${CONTACT_EMAIL}`, icon: HiMail, label: 'Email' },
 ]
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submit (e.g. send to API)
+    setStatus('sending')
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          from_name: 'Gopal Portfolio Contact',
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        setStatus('success')
+        setForm({ name: '', email: '', message: '' })
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -92,12 +119,19 @@ export default function ContactPage() {
                 required
               />
             </div>
+            {status === 'success' && (
+              <p className="text-emerald-400 text-sm font-medium">Message sent! I&apos;ll get back to you soon.</p>
+            )}
+            {status === 'error' && (
+              <p className="text-crimson text-sm font-medium">Something went wrong. Please try again or email directly.</p>
+            )}
             <button
               type="submit"
-              className="w-full py-4 bg-crimson text-white font-semibold rounded-lg hover:bg-crimson-dark transition-colors"
+              disabled={status === 'sending'}
+              className="w-full py-4 bg-crimson text-white font-semibold rounded-lg hover:bg-crimson-dark transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
               data-cursor
             >
-              Send Message
+              {status === 'sending' ? 'Sending…' : 'Send Message'}
             </button>
           </motion.form>
 

@@ -122,13 +122,22 @@ export function ProjectCard({ project, index }: { project: Project; index?: numb
         <div className="relative rounded-2xl glass-card overflow-hidden transition-[border-color,box-shadow,background] duration-500 group-hover:border-crimson/50">
           {/* Image area */}
           <div className="relative aspect-video bg-charcoal border-b border-charcoal-light overflow-hidden">
-            <div
-              className="absolute inset-0 flex items-center justify-center text-warm-muted/40 text-sm"
-              style={{ transform: 'translateZ(10px)' }}
-            >
-              [Project image]
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            {project.image ? (
+              <img
+                src={project.image}
+                alt={project.title}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                style={{ transform: 'translateZ(10px)' }}
+              />
+            ) : (
+              <div
+                className="absolute inset-0 flex items-center justify-center text-warm-muted/40 text-sm"
+                style={{ transform: 'translateZ(10px)' }}
+              >
+                [Project image]
+              </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/30 to-transparent opacity-40 group-hover:opacity-80 transition-opacity duration-700" />
           </div>
 
           {/* Content - lifted in 3D space */}
@@ -153,29 +162,32 @@ export function ProjectCard({ project, index }: { project: Project; index?: numb
 
             {/* Links */}
             <div className="flex flex-wrap gap-4 items-center">
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-warm-muted hover:text-crimson transition-colors duration-200 text-sm"
-                data-cursor
-              >
-                <FaGithub className="text-base" /> GitHub
-              </a>
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-warm-muted hover:text-gold transition-colors duration-200 text-sm"
-                data-cursor
-              >
-                <HiExternalLink className="text-base" /> Live Demo
-              </a>
+              {project.github && project.github !== '#' && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-warm-muted hover:text-crimson transition-colors duration-200 text-sm"
+                  data-cursor
+                >
+                  <FaGithub className="text-base" /> GitHub
+                </a>
+              )}
+              {project.live && project.live !== '#' && project.live.startsWith('http') && (
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-warm-muted hover:text-gold transition-colors duration-200 text-sm"
+                  data-cursor
+                >
+                  <HiExternalLink className="text-base" /> Live Demo
+                </a>
+              )}
               {project.pdfUrl && (
                 <a
                   href={project.pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  download
                   className="inline-flex items-center gap-2 text-warm-muted hover:text-emerald-400 transition-colors duration-200 text-sm"
                   data-cursor
                 >
